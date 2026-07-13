@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IGNITEX VIP</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Arial;background:#0b0f18;color:#fff;min-height:100vh;display:grid;place-items:center;overflow:hidden}
+:root{--mx:50vw;--my:50vh}
+body:before{content:"";position:fixed;inset:0;background:
+radial-gradient(260px circle at var(--mx) var(--my),rgba(34,211,238,.18),transparent 60%),
+radial-gradient(circle at 20% 20%,#2563eb33,transparent 30%),
+radial-gradient(circle at 80% 80%,#9333ea33,transparent 30%);pointer-events:none}
+.card,.modal{width:min(560px,92vw);background:rgba(255,255,255,.08);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.12);border-radius:24px;padding:28px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.badge{display:inline-block;padding:8px 14px;border-radius:999px;background:#22d3ee22;color:#7ee7f7}
+.price{font-size:44px;text-align:center;font-weight:800;margin:16px 0}.price span{font-size:16px;color:#aaa}
+.feature{padding:12px;margin:10px 0;border-radius:14px;background:#ffffff0a;border:1px solid #ffffff18}
+.notice{padding:14px;margin:18px 0;border-radius:14px;background:linear-gradient(135deg,#f59e0b22,#ef444422);border:1px solid #f59e0b66;text-align:center;color:#fde68a}
+button{width:100%;padding:15px;border:none;border-radius:16px;color:#fff;font-weight:700;cursor:pointer;transition:.25s;position:relative;overflow:hidden}
+button:before{content:"";position:absolute;left:-120%;top:0;width:60%;height:100%;background:linear-gradient(90deg,transparent,#fff5,transparent);transform:skewX(-20deg)}
+button:hover:before{left:160%;transition:.8s}button:hover{transform:translateY(-3px)}
+#vipBtn{background:linear-gradient(135deg,#22d3ee,#8b5cf6)}#continueBtn{margin-top:12px;background:linear-gradient(135deg,#2563eb,#06b6d4)}
+#verify,#overlay{display:none}#timer{
+font-size:60px;
+font-weight:800;
+text-align:center;
+margin:26px 0;
+letter-spacing:1px;
+color:#fff;
+text-shadow:0 0 15px rgba(255,255,255,.15);
+}
+.bar{height:8px;background:#222;border-radius:99px;overflow:hidden;margin:20px 0}#fill{height:100%;width:100%;background:linear-gradient(90deg,#22d3ee,#2563eb)}
+#holdBox{display:none;text-align:center}
+.wrap{
+position:relative;
+width:320px;
+height:60px;
+margin:0 auto;
+}
+svg{
+position:absolute;
+inset:0;
+width:100%;
+height:100%;
+overflow:visible;
+pointer-events:none;
+}
+@keyframes holdGradient{
+
+0%{
+background-position:0% 50%;
+}
+
+50%{
+background-position:100% 50%;
+}
+
+100%{
+background-position:0% 50%;
+}
+
+}
+
+#holdBtn:hover{
+
+background:rgba(35,45,64,.95);
+
+border-color:rgba(34,211,238,.5);
+
+box-shadow:
+0 0 12px rgba(34,211,238,.18);
+
+transform:translateY(-1px);
+
+}
+
+#holdBtn:active{
+
+transform:scale(.98);
+
+background:rgba(22,30,45,.98);
+
+}
+.track{
+fill:none;
+stroke:#ffffff22;
+stroke-width:3;
+}
+.prog{
+fill:none;
+stroke:#22d3ee;
+stroke-width:4;
+stroke-linecap:round;
+
+stroke-dasharray:752;
+stroke-dashoffset:752;
+
+filter:
+drop-shadow(0 0 8px #22d3ee)
+drop-shadow(0 0 16px #3b82f6);
+}
+#holdBtn{
+position:absolute;
+inset:0;
+width:100%;
+height:100%;
+border:none;
+border-radius:18px;
+
+cursor:pointer;
+
+font-size:16px;
+font-weight:700;
+
+color:#ffffff;
+
+background:rgba(28,36,52,.92);
+
+border:1px solid rgba(34,211,238,.25);
+
+box-shadow:
+0 6px 18px rgba(0,0,0,.35);
+
+transition:.25s;
+}
+#overlay{position:fixed;inset:0;background:#0008;backdrop-filter:blur(8px);align-items:center;justify-content:center}
+.seller{display:flex;gap:16px;align-items:center;background:linear-gradient(135deg,#0ea5e922,#8b5cf622);padding:16px;border-radius:18px;border:1px solid #22d3ee55}
+.avatar{width:72px;height:72px;border-radius:50%;border:3px solid #22d3ee;box-shadow:0 0 18px #22d3ee66}
+.info{flex:1}.tg{background:#229ED9}.copy{background:#1f2937}
+.row{display:flex;gap:10px;margin-top:12px}.close{background:#374151;margin-top:16px}
+</style></head><body>
+<div class="card">
+<div id="welcome">
+<div class="badge">⭐ IGNITEX VIP</div>
+<h1 style="text-align:center">Upgrade to IGNITEX VIP</h1>
+<p style="text-align:center;color:#cbd5e1">Unlock premium features and skip verification.</p>
+<div class="price">₹200 <span>/ 60 Days</span></div>
+<div class="feature">⚡ Skip Verification</div><div class="feature">🎮 Up to 240 FPS Support</div><div class="feature">🖥️ 480P to 4K Resolution</div><div class="feature">🔄 Priority Updates</div>
+<div class="notice"><b>Fixed Price ₹240</b><br>Non-refundable • Non-negotiable</div>
+<button id="vipBtn">Buy VIP Plan</button>
+<button id="continueBtn">Continue with Verification</button>
+</div>
+<div id="verify">
+
+<h2 style="
+text-align:center;
+font-size:34px;
+font-weight:800;
+color:#22d3ee;
+margin-bottom:18px;
+">
+⏳ Please Wait...
+</h2>
+
+<p style="
+text-align:center;
+color:#ffffff;
+font-size:18px;
+font-weight:600;
+margin:0;
+">
+Verification in progress.
+</p>
+
+<p style="
+text-align:center;
+color:#a1a1aa;
+font-size:15px;
+margin:10px 0 28px;
+line-height:1.6;
+">
+You will be redirected automatically.
+</p>
+
+<div id="timer"></div><div class="bar"><div id="fill"></div></div><p style="
+text-align:center;
+color:#9ca3af;
+font-size:15px;
+margin-top:18px;
+margin-bottom:22px;
+">
+Do not close this page during the countdown.
+</p>
+<div id="holdBox"><p>🔒 Hold to verify your session</p><div class="wrap">
+<svg viewBox="0 0 320 60"><rect class="track" x="2" y="2" rx="18" ry="18" width="316" height="56"/><rect id="prog" class="prog" x="2" y="2" rx="18" ry="18" width="316" height="56" pathLength="752"/></svg>
+<button id="holdBtn">Hold to Continue</button></div></div></div></div>
+
+<div id="overlay"><div class="modal">
+<h2>Official VIP Seller</h2>
+<div class="seller">
+<img class="avatar" src="data:image/jpeg;base64,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">
+<div class="info"><b>Nico</b><br><span style="color:#7ee7f7">@Nico_maxx</span><br><small>Official IGNITEX Seller</small></div>
+</div>
+<div class="row">
+<button class="tg" onclick="window.open('https://t.me/Nico_maxx','_blank')">📨 Open Telegram</button>
+<button id="copyBtn" class="copy" onclick="navigator.clipboard.writeText('@Nico_maxx');this.textContent='✓ Copied';setTimeout(()=>this.textContent='📋 Copy Username',1800)">📋 Copy Username</button>
+</div>
+<button class="close" onclick="overlay.style.display='none'">Close</button>
+</div></div>
+<script>
+document.addEventListener('mousemove',e=>{document.documentElement.style.setProperty('--mx',e.clientX+'px');document.documentElement.style.setProperty('--my',e.clientY+'px');});
+
+
+
+
+
+const TOTAL_TIME = 30; // Change only this value
+
+
+
+
+
+
+let t = TOTAL_TIME, s=false, p=false, r;
+
+vipBtn.onclick=()=>overlay.style.display='flex';
+timer.textContent = TOTAL_TIME;
+continueBtn.onclick=()=>{
+    welcome.style.display='none';
+    verify.style.display='block';
+    start();
+};
+function u(){timer.textContent=t;fill.style.width=(t/TOTAL_TIME*100)+'%';}
+
+
+
+
+
+function start(){if(s)return;s=true;u();let i=setInterval(()=>{if(p)return;t--;u();if(t>0&&t%7===0){p=true;holdBox.style.display='block';}if(t<=0){clearInterval(i);location.href='https://pubgmobil2617-design.github.io/verificationsuccess/';}},1000);}
+
+
+
+
+
+
+
+function begin(){if(!p)return;let st=performance.now();function f(n){let q=Math.min((n-st)/3000,1);prog.style.strokeDashoffset=752-(752*q);if(q>=1){p=false;holdBox.style.display='none';prog.style.strokeDashoffset=752;return;}r=requestAnimationFrame(f);}r=requestAnimationFrame(f);}
+function end(){cancelAnimationFrame(r);prog.style.strokeDashoffset=752;}
+holdBtn.onmousedown=begin;holdBtn.onmouseup=end;holdBtn.onmouseleave=end;
+holdBtn.ontouchstart=e=>{e.preventDefault();begin();};holdBtn.ontouchend=e=>{e.preventDefault();end();};
+</script></body></html>
